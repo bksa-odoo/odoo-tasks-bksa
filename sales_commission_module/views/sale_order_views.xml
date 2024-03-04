@@ -8,11 +8,14 @@
             <field name="payment_term_id" position="after">
                 <field name="commission" />
             </field>
-            <xpath expr="//field[@name='tax_totals']" position="before">
-                <field name="total_commission" widget="monteary" invisible="commission == False"/>
-            </xpath>
             <xpath expr="//field[@name='order_line']//tree//field[@name='price_subtotal']" position="before">
                 <field name="commission_lines" column_invisible="parent.commission == False"/>
+            </xpath>
+            <xpath expr="//group[@name='sale_total']" position="replace">
+                <group class="oe_subtotal_footer" colspan="2" name="sale_total">
+                    <field name="total_commission" widget="monteary"/>
+                    <field name="tax_totals" widget="account-tax-totals-field" nolabel="1" colspan="2" readonly="2"/>
+                </group>
             </xpath>
         </field>
     </record>
