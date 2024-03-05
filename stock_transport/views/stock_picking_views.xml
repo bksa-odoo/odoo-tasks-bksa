@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="transport_stock_picking" model="ir.ui.view">
+        <field name="name">stock.batch.picking.inhrited.from.transport.stock.picking</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='scheduled_date']" position="after">
+                <field name="volume" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

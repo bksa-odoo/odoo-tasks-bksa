@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="stock_picking_batch.stock_picking_batch_action" model="ir.actions.act_window">
+        <field name="view_mode">tree,form,kanban,graph,gantt</field>
+    </record>
+
+
+    <record id="stock_picking_batch_graph" model="ir.ui.view">
+        <field name="name">stock.picking.batch.Graph</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="arch" type="xml">
+            <graph string="Batch transfers">
+                <field name="vehicle_category_id" string="Vehicle Category"/>
+                <field name="is_wave" invisible="1"/>
+                <field name="scheduled_date" interval="week"/>
+                <field name="total_weight" string="Weights" type="measure"/>
+                <field name="total_volume" string="Volumes" type="measure"/>
+                <field name="transfer_lines" type="measure"/>
+                <field name="picking_lines" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="stock_picking_batch_view_gantt" model="ir.ui.view">
+        <field name="name">stock.picking.batch.gantt</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="arch" type="xml">
+            <gantt date_start="scheduled_date" date_stop="scheduled_date" default_scale="week" default_group_by="dock_id" color="id"
+            decoration-info ="state == 'draft'">
+                <field name="state"/>
+                <templates>
+                    <div t-name="gantt-popover" class="container-fluid">
+                        <div class="row no-gutters">
+                            <div class="col">
+                                <ul class="pl-1 mb-0">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </templates>
+            </gantt>
+        </field>
+    </record>
+
+
+    <record id="stock_picking_batch_form" model="ir.ui.view">
+        <field name="name">stock.picking.batch.form.inherit.stock.transport</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form"/>
+        <field name="arch" type="xml">
+            <field name='scheduled_date' position='after'>
+                <field name='dock_id'/>
+                <field name='vehicle_id'/>
+                <field name='vehicle_category_id'/>
+                <field name='total_weight' widget='progressbar' invisible="not vehicle_category_id"/>
+                <field name='total_volume' widget='progressbar' invisible="not vehicle_category_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>
