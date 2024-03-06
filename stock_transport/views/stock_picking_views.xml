@@ -8,6 +8,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='scheduled_date']" position="after">
                 <field name="volume" optional="show"/>
+                <field name='weight' optional="show"/>
             </xpath>
         </field>
     </record>

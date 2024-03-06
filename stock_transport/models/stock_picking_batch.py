@@ -43,12 +43,7 @@ class StockPickingBatch(models.Model):
     @api.depends("move_line_ids")
     def _compute_picking_lines(self):
         for record in self:
-            record.picking_lines = len(record.move_line_ids) 
-            
-    # @api.depends('dock_id.name', 'vehicle_category_id.name')
-    # def _compute_aggregate_field(self):
-    #     for record in self:
-    #         record.aggregate_filter_gantt = f"{record.dock_id.name} ({record.vehicle_category_id.name})"          
+            record.picking_lines = len(record.move_line_ids)       
             
             
                 

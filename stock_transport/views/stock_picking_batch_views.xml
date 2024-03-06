@@ -28,16 +28,6 @@
             <gantt date_start="scheduled_date" date_stop="scheduled_date" default_scale="week" default_group_by="dock_id" color="id"
             decoration-info ="state == 'draft'">
                 <field name="state"/>
-                <templates>
-                    <div t-name="gantt-popover" class="container-fluid">
-                        <div class="row no-gutters">
-                            <div class="col">
-                                <ul class="pl-1 mb-0">
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </templates>
             </gantt>
         </field>
     </record>
