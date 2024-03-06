@@ -25,9 +25,37 @@
         <field name="name">stock.picking.batch.gantt</field>
         <field name="model">stock.picking.batch</field>
         <field name="arch" type="xml">
-            <gantt date_start="scheduled_date" date_stop="scheduled_date" default_scale="week" default_group_by="dock_id" color="id"
-            decoration-info ="state == 'draft'">
+            <gantt date_start="scheduled_date" date_stop="scheduled_date" default_scale="week" default_group_by="vehicle_id,dock_id" color="id"
+            decoration-info ="state == 'draft'" decoration-success="state == 'done'">
                 <field name="state"/>
+                <field name="total_weight"/>
+                <field name="total_volume"/>
+                <field name="name"/>
+                <templates>
+                    <div t-name="gantt-popover" class="container-fluid">
+                        <div class="row no-gutters">
+                            <div class="col">
+                                <ul class="pl-1 mb-0">
+                                    <li>
+                                        <strong>
+                                            <t t-esc="name"/>
+                                        </strong>
+                                        <span> - </span>
+                                        <strong>
+                                            <t t-esc="total_weight"/>
+                                        </strong>
+                                        <span> kg, </span>
+                                        <strong>
+                                            <t t-esc="total_volume"/>
+                                        </strong>
+                                        <span>m<sup>3</sup>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </templates>
             </gantt>
         </field>
     </record>
