@@ -11,7 +11,7 @@ class StockPicking(models.Model):
      for record in self:
         total_weight = 0
         total_volume = 0
-        for move in record.move_ids:
+        for move in record.move_ids_without_package:
             for move_line in move:
                 quantity = move_line.product_qty
                 total_weight += move_line.product_id.weight * quantity

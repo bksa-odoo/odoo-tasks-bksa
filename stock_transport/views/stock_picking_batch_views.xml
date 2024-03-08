@@ -66,12 +66,24 @@
         <field name="model">stock.picking.batch</field>
         <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form"/>
         <field name="arch" type="xml">
-            <field name='scheduled_date' position='after'>
-                <field name='dock_id'/>
-                <field name='vehicle_id'/>
-                <field name='vehicle_category_id'/>
-                <field name='total_weight' widget='progressbar' invisible="not vehicle_category_id"/>
-                <field name='total_volume' widget='progressbar' invisible="not vehicle_category_id"/>
+            <field name='scheduled_date' position='replace'>
+                <group class='w-100'>
+                    <field name='dock_id'/>
+                    <field name='vehicle_id'/>
+                    <field name='vehicle_category_id'/>
+                </group>
+                <group class='w-50' invisible="not vehicle_category_id">
+                    <label for='total_weight'/>
+                    <div class='o_row w-50'>
+                        <field name='total_weight'/>
+                        <field name='total_weight_percentage' widget='progressbar' class='oe_inline'/>
+                    </div>
+                    <label for='total_volume'/>
+                    <div class='o_row w-50'>
+                        <field name='total_volume'/>
+                        <field name='total_volume_percentage' widget='progressbar' class='on_inline'/>
+                    </div>
+                </group>
             </field>
         </field>
     </record>
