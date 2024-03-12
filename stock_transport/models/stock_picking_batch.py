@@ -3,12 +3,12 @@ from odoo import fields,models,api
 class StockPickingBatch(models.Model):
     _inherit = 'stock.picking.batch'
     
-    
+    pillName = fields.Char('Pill Name', compute="_compute_pill_name", store=True)
     dock_id = fields.Many2one('dock.property', string='Dock')
     vehicle_id = fields.Many2one('fleet.vehicle', string='Vehicle')
     vehicle_category_id = fields.Many2one('fleet.vehicle.model.category', string='Vehicle Category')
-    total_weight = fields.Float(compute='_compute_total_weight', string='Weight', store=True)
-    total_volume = fields.Float(compute='_compute_total_volume', string='Volume', store=True)
+    total_weight = fields.Float(compute='_compute_total_weight', string='Weight',digits=(16,4), store=True)
+    total_volume = fields.Float(compute='_compute_total_volume', string='Volume',digits=(16,4), store=True)
     total_weight_percentage = fields.Float(compute='_compute_total_weight', string='Weight Percentage', digits=(16,4), store=True)
     total_volume_percentage = fields.Float(compute='_compute_total_volume', string='Volume Percentage',digits=(16,4), store=True)
     picking_lines = fields.Float(string="Lines", compute='_compute_picking_lines', store=True)
@@ -51,12 +51,16 @@ class StockPickingBatch(models.Model):
         for record in self:
             record.picking_lines = len(record.move_line_ids)      
             
+    # @api.depends('name','total_weight','total_volume')
+    # def _compute_display_name(self):
+    #     for record in self:       
+    #         record.display_name =  f"{record.name} {record.total_weight}kg, {record.total_volume}m\u00b3"
+    
+    
     @api.depends('name','total_weight','total_volume')
-    def _compute_display_name(self):
+    def _compute_pill_name(self):
         for record in self:       
-            record.display_name =  f"{record.name} {record.total_weight}kg, {record.total_volume}m\u00b3"
-                    
-            
+            record.pillName =  f"{record.name} {record.total_weight}kg, {record.total_volume}m\u00b3"
                 
                 
             

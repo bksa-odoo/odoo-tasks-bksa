@@ -10,13 +10,14 @@
         <field name="model">stock.picking.batch</field>
         <field name="arch" type="xml">
             <graph string="Batch transfers">
-                <field name="vehicle_category_id" string="Vehicle Category"/>
-                <field name="is_wave" invisible="1"/>
-                <field name="scheduled_date" interval="week"/>
-                <field name="total_weight" string="Weights" type="measure"/>
-                <field name="total_volume" string="Volumes" type="measure"/>
-                <field name="transfer_lines" type="measure"/>
-                <field name="picking_lines" type="measure"/>
+                <field name="vehicle_category_id" string="Vehicle Category" type="row"/>
+                <field name="scheduled_date" interval="week" type="row"/>
+                <field name="total_weight" />
+                <field name="total_weight_percentage" invisible="1"/>
+                <field name="total_volume" />
+                <field name="total_volume_percentage" invisible="1"/>
+                <field name="transfer_lines" />
+                <field name="picking_lines"/>
             </graph>
         </field>
     </record>
